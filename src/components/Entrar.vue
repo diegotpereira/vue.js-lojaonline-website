@@ -48,6 +48,16 @@ export default {
 	}
 }
 </script>
-<style lang="">
+<style>
+
+.login {
+    max-width: 400px;
+    margin-top: 60px;
+}
+
+.btn_field{
+    margin: 40px 0 16px 0;
+
+}
 	
 </style>
