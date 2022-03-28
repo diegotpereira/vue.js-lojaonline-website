@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Entrar from '../components/Entrar.vue'
 import Index from '../components/Index.vue'
-
+import Cadastrar from '../components/Cadastrar.vue'
 import firebase from 'firebase'
 
 Vue.use(Router)
@@ -13,6 +13,11 @@ const router = new Router({
             path: '/entrar',
             name: 'Entrar',
             component: Entrar
+        },
+        {
+            path: '/cadastrar',
+            name: 'Cadastrar',
+            component: Cadastrar
         },
         {
             path: '/',

@@ -4,11 +4,15 @@ import router from './router'
 //import firebase from 'firebase'
 
 Vue.config.productionTip = false
-    //let app = null;
-    //new Vue({
-    //    render: h => h(App),
-    //    router,
-    //}).$mount('#app')
+
+/* sweet alert */
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2);
+//let app = null;
+//new Vue({
+//    render: h => h(App),
+//    router,
+//}).$mount('#app')
 
 //firebase.auth().onAuthStateChanged(() => {
 
