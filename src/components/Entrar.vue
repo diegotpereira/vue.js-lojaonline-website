@@ -18,8 +18,8 @@
 	</div>
 </template>
 <script>
-//import firebase from 'firebase'
-import firebase from '../firebase'
+
+import * as firebase from "../firebase";
 
 export default {
 	name: 'Entrar',
@@ -33,7 +33,7 @@ export default {
 	methods: {
 		entrar() {
 			if (this.email && this.password) {
-				firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+				firebase.auth.signInWithEmailAndPassword(this.email, this.password)
 				.then(cred => {
 					this.$router.push({name: 'Index'})
 					console.log(cred);
