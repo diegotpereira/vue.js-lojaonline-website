@@ -2,28 +2,66 @@
   <div class="container main">
     <div class="search">
       <div class="searching_box input-field col s6">
-          <input id="icon_prefix" type="text" class="validate" placeholder="Pesquisar...">
-           <i class="clear material-icons grey-text">Fechar</i>
+          <input id="icon_prefix" type="text" class="validate" v-model="buscar_dado" placeholder="Pesquisar...">
+           <i class="clear material-icons grey-text" v-if="buscar_dado" @click="redefinirBusca">Fechar</i>
       </div>
     </div>
     <h2>Item Lista</h2>
-    <p class="item_quantity">Arma de fogo <span></span>produtos para cães</p>
+    <p class="item_quantity">Arma de fogo <span>{{ items.length }}</span>produtos para cães</p>
     <div class="sort_ed">
       <div class="sort">
-        <a href="#">último pedido</a>
-        <a href="">ordem por preço</a>
+        <a href="#" @click="classificarPorData()">último pedido</a>
+        <a href="#" @click="classificarPorPreco()">ordem por preço</a>
       </div>
       <div class="edit_delete">
-        <a href="#">Editar</a>
-        <a href="#">Deletar</a>
+        <a href="#" @click="editbtn=true">Editar</a>
+        <a href="#" @click="deletebtn=true">Deletar</a>
       </div>
     </div>
+	<div class="index">
+		<div class="card" v-for="item in itensFiltrados" :key="item.id">
+			<div class="card-content">
+				<router-link :to="{name: 'Detalhe', params: {item_slug: item.slug }}">
+					<h3>{{item.titulo }}</h3>
+				</router-link>
+				<p class="price"></p>
+				<div class="divider"></div>
+				<p class="writer">{{item.escritor }}</p>
+				<div class="cont">{{item.content }}</div>
+				<ul class="tags">
+					<li v-for= "(tag, index) in item.tags" :key="index" @click="encontrarPalavra">
+						<span class="tag"># {{ tag }}</span>
+					</li>
+				</ul>
+				<p class="date">{{ moment(item.date).format('D.M.Y')}}</p>
+				<div class="divider"></div>
+				<ul class="left_icon">
+					<li v-show="deletebtn" @click="deleteItem(item.id)">
+						<i class="material-icons grey-text delete">delete_forever</i>
+					</li>
+					<li v-show="editbtn">
+						<router-link :to="{ name: 'Edit', params: {item_slug: item.slug }}">
+							<i class="material-icons grey-text">Editar</i>
+						</router-link>
+					</li>
+				</ul>
+				<ul class="right_icon">
+					<li><router-link :to="{ name: 'Detail', params: {item_slug: item.slug }}"><i class="material-icons grey-text">local_grocery_store</i></router-link></li>
+				</ul>
+			</div>
+		</div>
+	</div>
   </div>
 </template>
 
 <script>
 export default {
-	name: 'Index'
+	name: 'Index',
+	data() {
+		return {
+			items: []
+		}
+	},
 }
 </script>
 

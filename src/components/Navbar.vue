@@ -6,8 +6,8 @@
 				<ul class="right">
 					<li><router-link :to="{name: '#'}">Registo de produto</router-link></li>
 					<li><router-link :to="{name: '#'}"><i class="material-icons white-text">local_grocery_store</i></router-link></li>
-					<li><router-link :to="{name: '#'}">Cadastre-se</router-link></li>
-					<li><router-link :to="{name: '#'}">Entrar</router-link></li>
+					<li v-if="!usuario"><router-link :to="{name: 'Cadastrar'}">Cadastre-se</router-link></li>
+					<li v-if="!usuario"><router-link :to="{name: 'Entrar'}">Entrar</router-link></li>
 					<li v-if="usuario"><a>{{ usuario.email }}</a></li>
 					<li v-if="usuario"><a @click="sair">Sair</a></li>
 				</ul>
