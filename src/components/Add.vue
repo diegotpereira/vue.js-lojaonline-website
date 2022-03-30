@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="divider"></div>
-				<div class="color-Pick">
+				<div class="color_Pick">
 					<p class="sub_title">Cor</p>
 					<p>
 						<label>
@@ -116,20 +116,20 @@ export default {
 			L: null,
 			wish: false,
 			escritor: null,
-			user: null,
-			id: null
+			usuario: null,
+			//id: null
 		}
 	},
 	created(){
-		let usuario = firebase.auth().currentUser
-		var ref = db.collection("usuarios")
-		ref.where('usuario_id','==', usuario).get()
+		//let usuario = firebase.auth().currentUser
+		let ref = db.collection("usuarios")
+		ref.where('usuario_id','==', firebase.auth().currentUser.uid).get()
 		.then(snapshot=>{
 			snapshot.forEach(doc => {
-				this.user =doc.data(),
-				this.user.id = doc.id
+				this.usuario = doc.data(),
+				this.usuario.id = doc.id
 			})
-			console.log('get current user id')
+			console.log('obter id usuário atual')
 		})
 	},
 	methods: {
@@ -154,7 +154,7 @@ export default {
 					L: this.L,
 					data: Date.now(),
 					slug: this.slug,
-					escritor: this.user
+					escritor: this.usuario.id
 					
 				}).then(() => {
 					this.$swal({
@@ -176,5 +176,24 @@ export default {
 }
 </script>
 <style>
-	
+	.add{
+  width: 70%;
+  margin:0 auto;
+}
+.add h2{
+  color: #ff7657;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+.sub_title{
+  font-weight: bold;
+  color: #ff7657;
+}
+.divider{
+  margin: 40px auto;
+}
+
+.btn_box{
+  margin-bottom: 40px;
+}
 </style>
