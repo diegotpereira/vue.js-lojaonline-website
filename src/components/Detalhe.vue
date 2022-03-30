@@ -203,7 +203,6 @@ export default {
 				this.feedback = 'Selecione a cor, tamanho e quantidade desejados.'
 			}
 		},
-<<<<<<< HEAD
 		resetarLista() {
 			this.feedback = null
 			this.corValor = null
@@ -213,8 +212,6 @@ export default {
 			this.quantidadeNumero = null 
 			this.listando_item = null 
 		},
-=======
->>>>>>> 3a6bb396e567f09cb1202b70dd31a64a99ea8e61
 		addCarrinho() {
 			if (this.listando_item) {
 				this.feedback = null 
