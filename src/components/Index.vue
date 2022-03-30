@@ -14,8 +14,8 @@
         <a href="#" @click="classificarPorPreco()">ordem por preço</a>
       </div>
       <div class="edit_delete">
-        <a href="#" @click="editbtn=true">Editar</a>
-        <a href="#" @click="deletebtn=true">Deletar</a>
+        <a href="#" @click="btnEditar=true">Editar</a>
+        <a href="#" @click="btnDeletar=true">Deletar</a>
       </div>
     </div>
 	<div class="index">
@@ -36,17 +36,17 @@
 				<p class="date">{{ moment(item.date).format('D.M.Y')}}</p>
 				<div class="divider"></div>
 				<ul class="left_icon">
-					<li v-show="deletebtn" @click="deleteItem(item.id)">
+					<li v-show="btnDeletar" @click="deletarItem(item.id)">
 						<i class="material-icons grey-text delete">delete_forever</i>
 					</li>
-					<li v-show="editbtn">
+					<li v-show="btnEditar">
 						<router-link :to="{ name: 'Edit', params: {item_slug: item.slug }}">
 							<i class="material-icons grey-text">Editar</i>
 						</router-link>
 					</li>
 				</ul>
 				<ul class="right_icon">
-					<li><router-link :to="{ name: 'Detail', params: {item_slug: item.slug }}"><i class="material-icons grey-text">local_grocery_store</i></router-link></li>
+					<li><router-link :to="{ name: 'Detalhe', params: {item_slug: item.slug }}"><i class="material-icons grey-text">local_grocery_store</i></router-link></li>
 				</ul>
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 <script>
 import {db} from '../firebase'
 import moment from 'moment'
-
+//import slugify from 'slugify'
 export default {
 	name: 'Index',
 	data() {
@@ -65,7 +65,9 @@ export default {
 			moment: moment,
 			items: [],
 			buscar_dado: '',
-			images:[]
+			images:[],
+			btnDeletar: false,
+			btnEditar: false
 		}
 	},
 	methods: {
@@ -91,6 +93,24 @@ export default {
 
 		return num.toString().replace(regexp, ',')
 	},
+	deletarItem(id) {
+		db.collection('items').doc(id).delete()
+		.then(() => {
+			this.items = this.items.filter(item => {
+
+				return item.id != id 
+			})
+			this.$swal({
+				position: 'center',
+				type: 'success',
+				title: 'Exclusão concluída',
+				showConfirmButton: false,
+				timer: 1000
+			})
+			this.btnDeletar = false
+		})
+	},
+
 	},
 	created() {
 		db.collection('items').get()
