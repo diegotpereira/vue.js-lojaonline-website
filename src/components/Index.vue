@@ -33,7 +33,7 @@
 						<span class="tag"># {{ tag }}</span>
 					</li>
 				</ul>
-				<p class="date"></p>
+				<p class="date">{{ moment(item.date).format('D.M.Y')}}</p>
 				<div class="divider"></div>
 				<ul class="left_icon">
 					<li v-show="deletebtn" @click="deleteItem(item.id)">
@@ -56,13 +56,16 @@
 
 <script>
 import {db} from '../firebase'
-//import buscarFiltros from '@/filtros/buscarFiltros'
+import moment from 'moment'
+
 export default {
 	name: 'Index',
 	data() {
 		return {
+			moment: moment,
 			items: [],
-			buscar_dado: ''
+			buscar_dado: '',
+			images:[]
 		}
 	},
 	methods: {

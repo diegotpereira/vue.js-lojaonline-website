@@ -2,7 +2,7 @@
 	<div class="detail">
 		<div class="item" v-if="item">
 			<div class="item-image">
-				<img src="" alt="">
+				<img src="@/assets/1.jpg" alt="">
 			</div>
 
 			<div class="item-content">
