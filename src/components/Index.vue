@@ -7,7 +7,7 @@
       </div>
     </div>
     <h2>Item Lista</h2>
-    <p class="item_quantity">Arma de fogo <span>{{ items.length }}</span>produtos para cães</p>
+	<p class="item_quantity">sua lista tem <span>{{ items.length }}</span> de itens.</p>
     <div class="sort_ed">
       <div class="sort">
         <a href="#" @click="classificarPorData()">último pedido</a>

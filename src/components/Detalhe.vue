@@ -146,14 +146,15 @@ export default {
 			console.log(this.item);
 		})
 		// obter usuario atual
-		db.collection('usuarios').where('usuario_id', '==', firebase.auth().currentUser.uid).get()
+		let usuario = firebase.auth().currentUser
+		db.collection('usuarios').where('usuario_id', '==', usuario).get()
 		.then(snapshot => {
 			snapshot.forEach(doc => {
 				this.user = doc.data(),
 				this.user.id = doc.id 
 			})
 			console.log('obter id usuário atual');
-			console.log(this.user.id);
+			//console.log(this.user.id);
 		})
 	},
 	methods: {

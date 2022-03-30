@@ -6,6 +6,8 @@ import Cadastrar from '../components/Cadastrar.vue'
 import firebase from 'firebase'
 import Add from '../components/Add.vue'
 import Detalhe from '../components/Detalhe.vue'
+import Carrinho from '../components/Carrinho.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -34,6 +36,11 @@ const router = new Router({
             path: '/:item_slug',
             name: 'Detalhe',
             component: Detalhe
+        },
+        {
+            path: '/carrinho',
+            name: 'Carrinho',
+            component: Carrinho
         }
     ]
 })
