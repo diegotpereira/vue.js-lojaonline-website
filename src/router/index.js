@@ -4,7 +4,7 @@ import Entrar from '../components/Entrar.vue'
 import Index from '../components/Index.vue'
 import Cadastrar from '../components/Cadastrar.vue'
 import firebase from 'firebase'
-
+import Add from '../components/Add.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -23,6 +23,11 @@ const router = new Router({
             path: '/',
             name: 'Index',
             component: Index
+        },
+        {
+            path: '/add',
+            name: 'Add',
+            component: Add
         }
     ]
 })
