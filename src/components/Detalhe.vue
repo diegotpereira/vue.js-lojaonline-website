@@ -202,6 +202,36 @@ export default {
 			} else {
 				this.feedback = 'Selecione a cor, tamanho e quantidade desejados.'
 			}
+		},
+		addCarrinho() {
+			if (this.listando_item) {
+				this.feedback = null 
+
+				db.collection('carrinhoItens').add({
+					titulo: this.item.titulo,
+					preco: this.item.preco,
+					produto_id: this.item.id,
+					cor: this.corValor,
+					tamanho: this.tamanhoValor,
+					quantidade: this.quantidadeValor,
+					total: this.total,
+					user: this.user.id
+				})
+				.then(() => {
+					this.$swal({
+						position: 'center',
+						type: 'sucess',
+						title: 'Concluir Adicionar ao Carrinho',
+						showConfirmButton: false,
+						timer: 1000
+					})
+					this.$router.push({ name: 'Carrinho'})
+				}).catch(err => {
+					console.log(err);
+				})
+			} else {
+				this.feedback = 'Falha ao adicionar ao carrinho. Tente novamente por favor!'
+			}
 		}
 	}
 }
