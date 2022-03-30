@@ -109,7 +109,7 @@ export default {
 			conteudo: null,
 			tags: [],
 			feedback: null,
-			usuarionome: null,
+			slug: null,
 			cores: [],
 			S: null,
 			M: null,
@@ -153,8 +153,8 @@ export default {
 					M: this.M,
 					L: this.L,
 					data: Date.now(),
-					usuarionome: this.usuarionome,
-					escritor: null
+					slug: this.slug,
+					escritor: this.user
 					
 				}).then(() => {
 					this.$swal({

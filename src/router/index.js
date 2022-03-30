@@ -5,6 +5,7 @@ import Index from '../components/Index.vue'
 import Cadastrar from '../components/Cadastrar.vue'
 import firebase from 'firebase'
 import Add from '../components/Add.vue'
+import Detalhe from '../components/Detalhe.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -28,6 +29,11 @@ const router = new Router({
             path: '/add',
             name: 'Add',
             component: Add
+        },
+        {
+            path: '/:item_slug',
+            name: 'Detalhe',
+            component: Detalhe
         }
     ]
 })

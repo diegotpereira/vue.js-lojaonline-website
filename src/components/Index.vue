@@ -19,21 +19,21 @@
       </div>
     </div>
 	<div class="index">
-		<div class="card" v-for="item in itensFiltrados" :key="item.id">
+		<div class="card" v-for="item in filtrarItens" :key="item.id">
 			<div class="card-content">
 				<router-link :to="{name: 'Detalhe', params: {item_slug: item.slug }}">
 					<h3>{{item.titulo }}</h3>
 				</router-link>
-				<p class="price"></p>
+				<p class="price">{{ addVirgula(item.preco) }}</p>
 				<div class="divider"></div>
 				<p class="writer">{{item.escritor }}</p>
-				<div class="cont">{{item.content }}</div>
+				<p class="cont">{{item.content }}</p>
 				<ul class="tags">
 					<li v-for= "(tag, index) in item.tags" :key="index" @click="encontrarPalavra">
 						<span class="tag"># {{ tag }}</span>
 					</li>
 				</ul>
-				<p class="date">{{ moment(item.date).format('D.M.Y')}}</p>
+				<p class="date"></p>
 				<div class="divider"></div>
 				<ul class="left_icon">
 					<li v-show="deletebtn" @click="deleteItem(item.id)">
@@ -55,13 +55,78 @@
 </template>
 
 <script>
+import {db} from '../firebase'
+//import buscarFiltros from '@/filtros/buscarFiltros'
 export default {
 	name: 'Index',
 	data() {
 		return {
-			items: []
+			items: [],
+			buscar_dado: ''
 		}
 	},
+	methods: {
+		encontrarPalavra: function(e) {
+			const fw = e.target.innerHTML
+			const fw_cut = fw.slice(1)
+			console.log(fw_cut);
+			console.log(e.target.nodeName);
+			this.buscar_dado = fw_cut;
+		},
+		redefinirBusca() {
+		this.buscar_dado = ''
+	},
+	classificarPorData() {
+		this.items.sort((a, b)=> a.data < b.data ? 1 : a.data > b.data ? -1 : 0)
+	},
+	classificarPorPreco() {
+		console.log(this.items);
+		this.items.sort((a, b)=> parseInt(a.preco) < parseInt(b.preco) ? -1 : parseInt(a.preco) > parseInt(b.preco) ? 1 :0)
+	},
+	addVirgula(num) {
+		var regexp = /\B(?=(\d{3})+(?!\d))/g
+
+		return num.toString().replace(regexp, ',')
+	},
+	},
+	created() {
+		db.collection('items').get()
+		.then(snapshot => {
+			snapshot.forEach(doc => {
+				let item = doc.data()
+				item.id = doc.id
+				this.items.push(item)
+				console.log(item);
+			})
+		})
+	},
+	computed: {
+        filtrarItens: function() {
+            return this.items.filter((item) => {
+
+                if (item.titulo.match(this.buscar_dado)) {
+
+                    return item.titulo.match(this.buscar_dado);
+
+                } else if (item.conteudo.match(this.buscar_dado)) {
+
+                    return item.conteudo.match(this.buscar_dado);
+
+                } else if (item.tags[0].match(this.buscar_dado)) {
+
+                    return item.tags[0].match(this.buscar_dado);
+
+                } else if (item.tags[1].match(this.buscar_dado)) {
+
+                    return item.tags[1].match(this.buscar_dado);
+
+                } else if (item.tags[2].match(this.buscar_dado)) {
+
+                    return item.tags[2].match(this.buscar_dado);
+                }
+            });
+        }
+    }
 }
 </script>
 
