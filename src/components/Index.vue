@@ -40,7 +40,7 @@
 						<i class="material-icons grey-text delete">delete_forever</i>
 					</li>
 					<li v-show="btnEditar">
-						<router-link :to="{ name: 'Edit', params: {item_slug: item.slug }}">
+						<router-link :to="{ name: 'Editar', params: {item_slug: item.slug }}">
 							<i class="material-icons grey-text">Editar</i>
 						</router-link>
 					</li>
@@ -74,7 +74,7 @@ export default {
 		encontrarPalavra: function(e) {
 			const fw = e.target.innerHTML
 			const fw_cut = fw.slice(1)
-			console.log(fw_cut);
+			console.dir(fw_cut);
 			console.log(e.target.nodeName);
 			this.buscar_dado = fw_cut;
 		},
@@ -153,7 +153,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .main{
   position: relative;

@@ -8,6 +8,8 @@ import Add from '../components/Add.vue'
 import Detalhe from '../components/Detalhe.vue'
 import Carrinho from '../components/Carrinho.vue'
 import Favorito from '../components/Favorito.vue'
+import Editar from '../components/Editar.vue'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -46,6 +48,11 @@ const router = new Router({
             path: '/favorito',
             name: 'Favorito',
             component: Favorito
+        },
+        {
+            path: '/edit/:item_slug',
+            name: 'Editar',
+            component: Editar
         }
     ]
 })
