@@ -7,7 +7,7 @@
       </div>
     </div>
     <h2>Item Lista</h2>
-	<p class="item_quantity">sua lista tem <span>{{ items.length }}</span> de itens.</p>
+	<p class="item_quantity">sua lista tem <span>{{ itens.length }}</span> de itens.</p>
     <div class="sort_ed">
       <div class="sort">
         <a href="#" @click="classificarPorData()">último pedido</a>
@@ -63,7 +63,7 @@ export default {
 	data() {
 		return {
 			moment: moment,
-			items: [],
+			itens: [],
 			buscar_dado: '',
 			images:[],
 			btnDeletar: false,
@@ -82,11 +82,11 @@ export default {
 		this.buscar_dado = ''
 	},
 	classificarPorData() {
-		this.items.sort((a, b)=> a.data < b.data ? 1 : a.data > b.data ? -1 : 0)
+		this.itens.sort((a, b)=> a.data < b.data ? 1 : a.data > b.data ? -1 : 0)
 	},
 	classificarPorPreco() {
-		console.log(this.items);
-		this.items.sort((a, b)=> parseInt(a.preco) < parseInt(b.preco) ? -1 : parseInt(a.preco) > parseInt(b.preco) ? 1 :0)
+		console.log(this.itens);
+		this.itens.sort((a, b)=> parseInt(a.preco) < parseInt(b.preco) ? -1 : parseInt(a.preco) > parseInt(b.preco) ? 1 :0)
 	},
 	addVirgula(num) {
 		var regexp = /\B(?=(\d{3})+(?!\d))/g
@@ -94,9 +94,9 @@ export default {
 		return num.toString().replace(regexp, ',')
 	},
 	deletarItem(id) {
-		db.collection('items').doc(id).delete()
+		db.collection('itens').doc(id).delete()
 		.then(() => {
-			this.items = this.items.filter(item => {
+			this.itens = this.itens.filter(item => {
 
 				return item.id != id 
 			})
@@ -113,19 +113,19 @@ export default {
 
 	},
 	created() {
-		db.collection('items').get()
+		db.collection('itens').get()
 		.then(snapshot => {
 			snapshot.forEach(doc => {
 				let item = doc.data()
 				item.id = doc.id
-				this.items.push(item)
+				this.itens.push(item)
 				console.log(item);
 			})
 		})
 	},
 	computed: {
         filtrarItens: function() {
-            return this.items.filter((item) => {
+            return this.itens.filter((item) => {
 
                 if (item.titulo.match(this.buscar_dado)) {
 

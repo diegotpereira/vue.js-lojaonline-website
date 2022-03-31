@@ -1,7 +1,7 @@
 export default {
     computed: {
         filtrarItens: function() {
-            return this.items.filter((item) => {
+            return this.itens.filter((item) => {
 
                 if (item.titulo.match(this.buscar_dado)) {
 

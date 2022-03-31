@@ -143,7 +143,7 @@ export default {
 				})
 				console.log(this.slug)
 				
-				db.collection('items').add({
+				db.collection('itens').add({
 					titulo: this.titulo,
 					preco: this.preco,
 					conteudo: this.conteudo,

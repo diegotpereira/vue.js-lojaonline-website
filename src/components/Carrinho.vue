@@ -6,20 +6,20 @@
 		<table class="cart_table">
 			<tr class="table title">
 				<th v-for="coluna in colunas" :key="coluna.index"> {{ coluna }}</th>
-				<th></th>
+				<th>　　</th>
 			</tr>
 
-			<tr class="table_value" v-for="carrinhoItem in carrinhoItens" :key="carrinhoItem">
+			<tr class="table_value" v-for="carrinhoItem in carrinhoItens" :key="carrinhoItem.id">
 				<td>{{ carrinhoItem.id }}</td>
 				<td>{{ carrinhoItem.usuario }}</td>
 				<td>{{ carrinhoItem.produto_id }}</td>
 				<td>{{ carrinhoItem.titulo }}</td>
 				<td>{{ carrinhoItem.cor }}</td>
 				<td>{{ carrinhoItem.tamanho }}</td>
-				<td>{{ addVirgula(carrinhoItem.reco) }}</td>
+				<td>{{ addVirgula(carrinhoItem.preco) }}</td>
 				<td>{{ carrinhoItem.quantidade }}</td>
 				<td>{{ addVirgula(carrinhoItem.total)}} </td>
-				<td><i class="material-icons btnDeletar" @click="deletarCarrinhoItem(carrinhoItem.id)">Limpar</i></td>
+				<td><i class="material-icons delete_btn" @click="deletarCarrinhoItem(carrinhoItem.id)">Limpar</i></td>
 			</tr>
 		</table>
 
@@ -60,18 +60,18 @@ export default {
 				let carrinhoItem = doc.data()
 				carrinhoItem.id = doc.id 
 
-				this.ccarrinhoItens.push(carrinhoItem)
+				this.carrinhoItens.push(carrinhoItem)
 			})
 			console.table(this.carrinhoItens)
 		})
 		//obter usuario atual 
 		console.log('atual uid', firebase.auth().currentUser.uid);
 		//db.collection('usuarios').where('usuario_id', '==', firebase.auth().currentUser.uid).get()
-		let ref = db.collection("usuarios")
-		ref.where('usuario_id','==', firebase.auth().currentUser.uid).get()
+		let refNom = db.collection("usuarios")
+		refNom.where('usuario_id','==', firebase.auth().currentUser.uid).get()
 		.then(snapshot => {
 			snapshot.forEach(doc => {
-				this.usuario = doc.data()
+				this.usuario = doc.data(),
 				this.usuario.id = doc.id 
 			})
 		})
@@ -85,7 +85,7 @@ export default {
 		},
 		verificarItens() {
 			for(var index = 0; index <= this.carrinhoItens.length; index++) {
-				if (this.carrinhoItens.usuario == this.usuario.alias) {
+				if (this.carrinhoItem.usuario == this.usuario.alias) {
 					this.combinarItens.push(this.carrinhoItem)
 					console.log(this.combinarItens);
 				}
