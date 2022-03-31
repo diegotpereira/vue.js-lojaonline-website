@@ -114,7 +114,7 @@ export default {
 			S: null,
 			M: null,
 			L: null,
-			wish: false,
+			favorito: false,
 			escritor: null,
 			usuario: null,
 			//id: null

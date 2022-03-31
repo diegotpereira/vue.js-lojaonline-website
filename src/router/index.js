@@ -7,7 +7,7 @@ import firebase from 'firebase'
 import Add from '../components/Add.vue'
 import Detalhe from '../components/Detalhe.vue'
 import Carrinho from '../components/Carrinho.vue'
-
+import Favorito from '../components/Favorito.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -41,6 +41,11 @@ const router = new Router({
             path: '/carrinho',
             name: 'Carrinho',
             component: Carrinho
+        },
+        {
+            path: '/favorito',
+            name: 'Favorito',
+            component: Favorito
         }
     ]
 })

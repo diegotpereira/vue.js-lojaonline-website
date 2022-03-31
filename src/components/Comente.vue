@@ -2,7 +2,7 @@
 	<div class="comment">
 		<div class="divider"></div>
 		<h4 class="sub_title">comentarios <span>({{comentarios.length}})</span></h4>
-		<div class="shoe_comment" v-for="(comente, index) in comentarios" :key="index">
+		<div class="show_comment" v-for="(comente, index) in comentarios" :key="index">
 			<p class="from">{{comente.de}}</p>
 			<p class="timestamp">{{moment(comente.hora).fromNow()}}</p>
 			<p class="content">{{comente.conteudo}}</p>
@@ -16,7 +16,7 @@
 					<p class="red-text center" v-if="feedback">{{ feedback }}</p>
 				</div>
 				<div class="field center-align btn_box">
-					<div class="btn waves-effect waves-light deep-orange lighten-1" @click="addComentario">Adicionar Comentário</div>
+					<button class="btn waves-effect waves-light deep-orange lighten-1" @click="addComentario">Adicionar Comentário</button>
 				</div>
 			</form>
 		</div>
