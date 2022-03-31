@@ -6,7 +6,7 @@
 		<table class="cart_table">
 			<tr class="table title">
 				<th v-for="coluna in colunas" :key="coluna.index"> {{ coluna }}</th>
-				<th>　　</th>
+				<th></th>
 			</tr>
 
 			<tr class="table_value" v-for="carrinhoItem in carrinhoItens" :key="carrinhoItem.id">
@@ -119,7 +119,7 @@ export default {
 	}
 }
 </script>
-<style>
+<style scoped>
 
 table th, td{
     text-align: center;

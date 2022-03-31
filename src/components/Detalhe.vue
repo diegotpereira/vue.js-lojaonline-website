@@ -127,6 +127,7 @@
 				</li>
 			</ul>
 		</div>
+		<comentario></comentario>
 	</div>
 </template>
 
@@ -136,8 +137,12 @@
     } from '../firebase';
 import firebase from 'firebase'
 import moment from 'moment'
+import comentario from '../components/Comente.vue'
 export default {
     name: 'Detalhe',
+	components: {
+		comentario
+	},
     data() {
         return {
             moment: moment,
